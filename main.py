@@ -10,7 +10,14 @@ def get_cards(no_cards=1):
 
 
 def get_score(input_cards):
-    return sum(input_cards)
+    score = sum(input_cards)
+
+    if score > 21 and 11 in input_cards:
+        while 11 in input_cards:
+            input_cards.remove(11)
+            input_cards.append(1)
+        return sum(input_cards)
+    return score
 
 
 def get_computer_cards(comp_cards, opponent_score):
@@ -48,7 +55,7 @@ def check_results(player_final_score, computer_final_score):
 while input("Do you want to play a game of Blackjack? Type 'y' or 'n':").lower() == "y":
     print(art.logo)
     player_cards = get_cards(2)
-    computer_cards = get_cards()
+    computer_cards = get_cards(2)
     game_on = True
     while game_on:
         player_score = get_score(player_cards)
